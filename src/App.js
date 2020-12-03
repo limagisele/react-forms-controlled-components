@@ -1,11 +1,33 @@
 import React from 'react'
+import {CenteredRow} from './Styled'
+import NewProjectForm from './NewProjectForm'
+import ProjectList from './ProjectList'
 
-const App = () => {
-  return (
-    <div >
-          The basic empty template
-    </div>
-  )
+class App extends React.Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			projects: []
+		}
+	}	
+	setProjects = (projects) => {
+		this.setState({projects: projects})
+	}
+	render() {
+		return (
+			<div>
+				<h1>My Projects</h1>
+				<CenteredRow >
+					<NewProjectForm projects={this.state.projects} setProjects={this.setProjects} />
+				</CenteredRow>
+				<CenteredRow >
+					<ProjectList projects={this.state.projects}/>
+				</CenteredRow>
+			</div>
+		)
+
+	}
+
 }
 
 export default App
