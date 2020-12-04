@@ -9,8 +9,10 @@ class NewProjectForm extends React.Component {
 		this.state = {name: ""}
 	}
 
-	// Implement the handleChange function and define it as the change handler
-	// for the controlled input:
+	// In part 1, implement the handleChange function and define it as the change handler
+	// for the controlled input
+	// In part 2, you can either add another change handler function, 
+	// or use this one for both name and description inputs
 	handleChange = (event) => {
 
 	}

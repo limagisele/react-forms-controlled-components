@@ -46,6 +46,7 @@ In part 2 of the challenge, you will add another controlled element to the form 
 You will have to:
 
 - Add the input element in NewProjectForm, and an additional piece of state to track the description value
+- Add a change handler function for the description field - you can add a separate handler function, or work out how you could use the same function
 - In the handleSubmit function, make a change to add the description to the project that is added to the array in App state
 - Update ProjectList to display the description with the project name
 
