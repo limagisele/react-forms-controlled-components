@@ -1,13 +1,10 @@
-import React from 'react';
-import {Input, Card, Button} from './Styled'
+import React, { useState } from 'react';
+import { Input, Card, Button } from './Styled'
 
 // 1. Make the text input a controlled component by adding an onChange listener
 //    and storing the current value in local state. 
-class NewProjectForm extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {name: ""}
-	}
+function NewProjectForm(props) {
+	const [name, setName] = useState("")
 
 	// In part 1, implement the handleChange function and define it as the change handler
 	// for the controlled input
@@ -27,8 +24,8 @@ class NewProjectForm extends React.Component {
 		event.preventDefault()
 		const textField = event.target.children[0]
 		const newProjectName = textField.value
-		let updatedProjects = [{name: newProjectName},...this.props.projects]
-		this.props.setProjects(updatedProjects)
+		let updatedProjects = [{ name: newProjectName }, ...props.projects]
+		props.setProjects(updatedProjects)
 		textField.value = ""
 	}
 
@@ -42,21 +39,19 @@ class NewProjectForm extends React.Component {
 	// 3. If Add Project is clicked and no name is given, display a warning message 
 	//    above the form that says "You must enter a project name".
 	//    Make sure you consult the value in state (not in the DOM) to determine when to display a warning.
-	render() {
-		return (
-			<div>
-				<Card data-testid="name-state" bgcolor="pink">
-					name: {this.state.name}
-				</Card>
-				<Card >
-					<form onSubmit={this.handleSubmit} data-testid="project-form">
-						<Input data-testid="project-name" type="text" ></Input>	
-						<Button data-testid="project-add">Add Project</Button>
-					</form>
-				</Card>
-			</div>
-		);
-	}
+	return (
+		<div>
+			<Card data-testid="name-state" bgcolor="pink">
+				name: {name}
+			</Card>
+			<Card >
+				<form onSubmit={handleSubmit} data-testid="project-form">
+					<Input data-testid="project-name" type="text" ></Input>
+					<Button data-testid="project-add">Add Project</Button>
+				</form>
+			</Card>
+		</div>
+	);
 }
 
 export default NewProjectForm;
