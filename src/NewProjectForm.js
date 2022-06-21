@@ -1,52 +1,31 @@
 import React, { useState } from 'react';
 import { Input, Card, Button } from './Styled'
 
-// 1. Make the text input a controlled component by adding an onChange listener
-//    and storing the current value in local state. 
-function NewProjectForm(props) {
+function NewProjectForm({ projects, setProjects }) {
 	const [name, setName] = useState("")
+	const [description, setDescription] = useState("")
+	const [warning, setWarning] = useState(false)
 
-	// In part 1, implement the handleChange function and define it as the change handler
-	// for the controlled input
-	// In part 2, you can either add another change handler function, 
-	// or use this one for both name and description inputs
-	handleChange = (event) => {
-
-	}
-
-	// After you implement part 1 of this challenge, you should no longer need to
-	// refer to the DOM element (event.target) in handleSubmit.
-	// Change the handleSubmit implementation to get the value from local state
-	// rather than from the DOM:
-	handleSubmit = (event) => {
-		// handleSubmit gets the value currently in the text field from the dom
-		// and updates the list of projects using setState passed in from App
+	const handleSubmit = (event) => {
 		event.preventDefault()
-		const textField = event.target.children[0]
-		const newProjectName = textField.value
-		let updatedProjects = [{ name: newProjectName }, ...props.projects]
-		props.setProjects(updatedProjects)
-		textField.value = ""
+		if (name != "") {
+			setProjects([{ name, description }, ...projects])
+			setName("")
+		} else {
+			setWarning(true)
+		}
 	}
 
-	// 2. Add another Input of type text for a description after the name field. 
-	//    Give it the attribute name="description".
-	//    Make it a controlled component with a change handler like the first input.
-	//    When 'Add project' is clicked, include the description in the project saved to state.
-	//    
-	//    See ProjectList for the update you should include there to show the description.
-	//
-	// 3. If Add Project is clicked and no name is given, display a warning message 
-	//    above the form that says "You must enter a project name".
-	//    Make sure you consult the value in state (not in the DOM) to determine when to display a warning.
 	return (
 		<div>
 			<Card data-testid="name-state" bgcolor="pink">
 				name: {name}
 			</Card>
 			<Card >
+				{warning && <p>You must enter a project name</p>}
 				<form onSubmit={handleSubmit} data-testid="project-form">
-					<Input data-testid="project-name" type="text" ></Input>
+					<Input onChange={e => setName(e.target.value)} data-testid="project-name" type="text" ></Input>
+					<Input onChange={e => setDescription(e.target.value)} data-testid="project-description" name="description" type="text" ></Input>
 					<Button data-testid="project-add">Add Project</Button>
 				</form>
 			</Card>
